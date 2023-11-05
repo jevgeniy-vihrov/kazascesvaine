@@ -1,77 +1,155 @@
-html {
-	margin: 0;
-	height: 100%;
-	background: linear-gradient(#faca1b, #ed5421);
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<div id="center"></div>
+
+<div id="topleft"></div>
+
+<div id="top"></div>
+
+<div id="bottomleft"></div>
+
+<div id="bottomright"></div>
+
+<body>
+
+<script>
+var params = {};
+location.search.slice(1).split("&").forEach(function(pair) {
+   pair = pair.split("=");
+   params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+});
+
+	function mobile() {
+		const toMatch = [
+			/Android/i,
+			/webOS/i,
+			/iPhone/i,
+			/iPad/i,
+			/iPod/i,
+			/BlackBerry/i,
+			/Windows Phone/i
+		];
+		
+		return toMatch.some((toMatchItem) => {
+			return navigator.userAgent.match(toMatchItem);
+		});
+	}
+	
+if(mobile()) {
+	document.body.style.zoom = "200%";
 }
 
-body {
-	color: white;
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: 50pt;
-    margin-right: 50pt;
-    margin-top: 50pt;
-    margin-bottom: 50pt;
-	font-family: Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif;
-}
+id = params["name"].toLowerCase();
 
-#right {
-	text-align: right; 
-	font-size: 20pt;
-}
+guest = new Map();
+guest["alise-roberts"] = {name:"Alise un Robert", lang:"lv"};
+guest["ramona-janis"] = {name:"Ramona un Jāni", lang:"lv"};
+guest["mikus"] = {name:"Mikus", lang:"lv"};
+guest["gaida-alberts"] = {name:"Gaida un Albert", lang:"lv"};
+guest["andrey"] = {name:"Андрей", lang:"ru"};
+guest["krisjanis"] = {name:"Krišjāni", lang:"lv"};
+guest["vladimir"] = {name:"Вова", lang:"ru"};
+guest["normunds"] = {name:"Normund", lang:"lv"};
+guest["jelena-sergey"] = {name:"Лена и Сергей", lang:"ru"};
+guest["guna"] = {name:"Guna", lang:"lv"};
+guest["zelma"] = {name:"Zelma", lang:"lv"};
+guest["mareta"] = {name:"Māreta", lang:"lv"};
+guest["beatrise"] = {name:"Beatrise", lang:"lv"};
+guest["paula"] = {name:"Paula", lang:"lv"};
+guest["monta"] = {name:"Monta", lang:"lv"};
+guest["beate"] = {name:"Beāte", lang:"lv"};
+guest["niklavs"] = {name:"Niklāv", lang:"lv"};
+guest["ieva"] = {name:"Ieva", lang:"lv"};
+guest["darta-alexey"] = {name:"Dārta un Aleksej", lang:"lv"};
+guest["matiss"] = {name:"Matīss", lang:"lv"};
+guest["andis"] = {name:"Andi", lang:"lv"};
+guest["alexander"] = {name:"Саша", lang:"ru"};
+guest["katrina-peteris"] = {name:"Katrīna un Pēteri", lang:"lv"};
+guest["ansis"] = {name:"Ansi", lang:"lv"};
 
-#bottomright {
-	position: absolute;
-	bottom: 20px;
-	right: 20px;
-	font-size: 18px;
-}
+name = guest[id].name;
+lang = guest[id].lang;
+mob = mobile();
 
-#bottomleft {
-	position: absolute;
-	bottom: 20px;
-	left: 20px;
-	font-size: 18px;
-}
+document.getElementById("center").innerHTML = "<p style=\"font-size:30px\">"+name+"!</p>"+(lang=="lv"?"<p>Būsim priecīgi tevi<br/>redzēt mūsu kāzās!</p>":"<p>Будем рады видеть тебя<br/>на нашей свадьбе!</p>");
 
-#topleft {
-	position: absolute;
-	top: 20px;
-	left: 20px;
-	font-size: 18px;
-}
+document.getElementById("top").innerHTML = (lang=="lv"?"Elīza un Žeņa precas!":"Женя и Элиза женятся!");
 
-#topright {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	font-size: 18px;
-}
+document.getElementById("bottomleft").innerHTML = (lang=="lv"?"Kad: 13. jūlijā<br/>Kur: Cesvainē un Virgabaļos<br/>Vairāk info: sekos":"Когда: 13-ого июля<br/>Где: Цесвайне и Виргабали<br/>Больше инфо: следует");
+</script>
 
-#top {
-	position: absolute;
-	top: 30px;
-	left: 50%;
-	transform: translate(-50%, 0%);
-	font-size: 35px;
-	color: #ef691f;
-	text-align: center;
-}
+<canvas id="canvas" width="500" height="500"></canvas>
+</body>
 
-#center {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	font-size: 25px;
-	text-align: center;
-}
+<script>
+	const canvas = document.getElementById('canvas');
+	canvas.style = "position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto;";
+	
+	const context = canvas.getContext('2d');
 
-canvas {
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 400px;
-}
+	// Set the r and position of the semicircle
+	const r = 200;
+	const cx = canvas.width / 2;
+	const cy = canvas.height / 2;
+	
+	function getx(dist, angle) {
+		return cx+dist*Math.cos(angle);
+	}
+	
+	function gety(dist, angle) {
+		return cy-dist*Math.sin(angle);
+	}
+	
+	function beop(angle) {
+		a = Math.PI/2+angle;
+		context.beginPath();
+		
+		x = getx(r+28, a);
+		y = gety(r+28, a);
+		context.arc(x, y, 4, 0, 2*Math.PI, false);
+		
+		w = .03;
+		context.moveTo(getx(r+24, a),gety(r+24, a));
+		context.lineTo(getx(r+12, a),gety(r+12, a));
+		context.lineTo(getx(r+1,a-w),gety(r+1,a-w));
+		context.moveTo(getx(r+12, a),gety(r+12, a));
+		context.lineTo(getx(r+1,a+w),gety(r+1,a+w));
+		
+		context.moveTo(getx(r+15,a+angle),gety(r+15,a+angle));
+		context.lineTo(getx(r+20,a),gety(r+20,a));
+		context.lineTo(getx(r+15,Math.PI/2),gety(r+15,Math.PI/2));
+		
+		context.lineWidth = 1.5;
+		context.strokeStyle = 'white';
+		context.stroke();
+	}
+
+	function draw() {
+		context.clearRect(0, 0, canvas.width, canvas.height);
+
+		context.beginPath();
+		context.arc(cx, cy, r, Math.PI, 2*Math.PI, false);
+		context.lineWidth = 2;
+		context.strokeStyle = 'white';
+		context.stroke();
+		
+		l = 0.05;
+		beop(l);
+		beop(-l);
+		
+		context.translate(cx,cy);
+		context.rotate(mobile() ? 0.03 : 0.02);
+		context.translate(-cx,-cy);
+
+		requestAnimationFrame(draw);
+	}
+
+	draw();
+</script>
+
+</html>
