@@ -24,6 +24,26 @@ location.search.slice(1).split("&").forEach(function(pair) {
    params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
 });
 
+	function mobile() {
+		const toMatch = [
+			/Android/i,
+			/webOS/i,
+			/iPhone/i,
+			/iPad/i,
+			/iPod/i,
+			/BlackBerry/i,
+			/Windows Phone/i
+		];
+		
+		return toMatch.some((toMatchItem) => {
+			return navigator.userAgent.match(toMatchItem);
+		});
+	}
+	
+if(mobile()) {
+	document.body.style.zoom = "200%";
+}
+
 id = params["name"].toLowerCase();
 
 guest = new Map();
@@ -59,12 +79,13 @@ guest["katrina"] = {name:"Katrīna", lang:"lv"};
 
 name = guest[id].name;
 lang = guest[id].lang;
+mob = mobile();
 
 document.getElementById("center").innerHTML = "<p style=\"font-size:30px\">"+name+"!</p>"+(lang=="lv"?"<p>Būsim priecīgi tevi<br/>redzēt mūsu kāzās!</p>":"<p>Будем рады видеть тебя<br/>на нашей свадьбе!</p>");
 
 document.getElementById("top").innerHTML = (lang=="lv"?"Elīza un Žeņa precas!":"Женя и Элиза женятся!");
 
-document.getElementById("bottomleft").innerHTML = (lang=="lv"?"Kad: 13. jūlijā<br/>Kur: Cesvainē un Virgabaļos<br/>Vairāk info: sekos":"Когда: 13-ого июля<br/>Где: Цесвайне и Виргабали<br/>Больше инфо: следует");
+document.getElementById("bottomleft").innerHTML = (lang=="lv"?"Kad: 13. jūlijā<br/>Kur: Cesvainē un Virgabaļos<br/>Vairāk info: sekos":"Когда? 13-ого июля<br/>Где: Цесвайне и Виргабали<br/>Больше инфо: следует");
 </script>
 
 <canvas id="canvas" width="500" height="500"></canvas>
