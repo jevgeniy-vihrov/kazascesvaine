@@ -32,16 +32,18 @@ location.search.slice(1).split("&").forEach(function(pair) {
 			/iPad/i,
 			/iPod/i,
 			/BlackBerry/i,
-			/Windows Phone/i
+			/Windows Phone/i,
+			/firefox/i
 		];
 		
 		return toMatch.some((toMatchItem) => {
 			return navigator.userAgent.match(toMatchItem);
-		});
+		}) || (navigator.platform.toLowerCase().indexOf("android") > -1);
 	}
 	
 if(mobile()) {
 	document.body.style.zoom = "200%";
+	document.body.style.MozTransform = "scale(2)";
 }
 
 id = params["name"].toLowerCase();
