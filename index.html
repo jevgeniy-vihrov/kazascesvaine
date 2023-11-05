@@ -3,7 +3,6 @@
 
 <head>
 <link rel="stylesheet" href="style.css">
-<link href='https://fonts.googleapis.com/css?family=Yeseva One' rel='stylesheet'>
 <link href='https://fonts.googleapis.com/css?family=Cormorant Garamond' rel='stylesheet'>
 </head>
 
@@ -78,11 +77,11 @@ name = guest[id].name;
 lang = guest[id].lang;
 mob = mobile();
 
-document.getElementById("center").innerHTML = "<p style=\"font-size:35px;font-family:Yeseva One;\">"+name+"!</p>"+(lang=="lv"?"<p>Būsim priecīgi tevi<br/>redzēt mūsu kāzās!</p>":"<p>Будем рады видеть тебя<br/>на нашей свадьбе!</p>");
+document.getElementById("center").innerHTML = "<p style=\"font-size:35px;font-family:Palatino Linotype;font-weight:bold;\">"+name+"!</p>"+(lang=="lv"?"<p>Būsim priecīgi tevi<br/>redzēt mūsu<br/>kāzās!</p>":"<p>Будем рады видеть тебя<br/>на нашей свадьбе!</p>");
 
-document.getElementById("top").innerHTML = (lang=="lv"?"Elīza un Žeņa precas!":"Женя и Элиза женятся!");
+//document.getElementById("top").innerHTML = (lang=="lv"?"Elīza un Žeņa precas!":"Женя и Элиза женятся!");
 
-document.getElementById("bottomleft").innerHTML = (lang=="lv"?"Kad: 13. jūlijā<br/>Kur: Cesvainē un Virgabaļos<br/>Vairāk info: sekos":"Когда: 13-ого июля<br/>Где: Цесвайне и Виргабали<br/>Больше инфо: следует");
+document.getElementById("bottomleft").innerHTML = (lang=="lv"?"Kas precas: Elīza un Žeņa<br/>Kad: 13. jūlijā<br/>Kur: Cesvainē un Virgabaļos<br/>Vairāk info: sekos":"Кто женится: Женя и Элиза<br/>Когда: 13-ого июля<br/>Где: Цесвайне и Виргабали<br/>Больше инфо: следует");
 </script>
 
 <canvas id="canvas" width="500" height="500"></canvas>
@@ -130,9 +129,29 @@ document.getElementById("bottomleft").innerHTML = (lang=="lv"?"Kad: 13. jūlijā
 		context.strokeStyle = 'white';
 		context.stroke();
 	}
+	
+	function letter(angle, symb) {
+		context.translate(cx,cy);
+		context.rotate(angle);
+		context.fillText(symb, 0, -r-7);
+		context.rotate(-angle);
+		context.translate(-cx,-cy);
+	}
 
 	function draw() {
 		context.clearRect(0, 0, canvas.width, canvas.height);
+		
+		/*context.fillStyle = "#ffffff";
+		context.font='20px Sans';
+		letter(-.47, "E");
+		letter(-.39, "L");
+		letter(-.32, "Ī");
+		letter(-.265, "Z");
+		letter(-.19, "A");
+		letter(+.13, "Ž");
+		letter(+.21, "E");
+		letter(+.29, "Ņ");
+		letter(+.38, "A");*/
 
 		context.beginPath();
 		context.arc(cx, cy, r, Math.PI, 2*Math.PI, false);
