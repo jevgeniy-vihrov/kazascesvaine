@@ -47,19 +47,15 @@ if(mobile()) {
 id = params["name"].toLowerCase();
 
 guest = new Map();
-guest["alise"] = {name:"Alise", lang:"lv"};
-guest["roberts"] = {name:"Robert", lang:"lv"};
-guest["ramona"] = {name:"Ramona", lang:"lv"};
-guest["janis"] = {name:"Jāni", lang:"lv"};
-guest["mikus"] = {name:"Miku", lang:"lv"};
-guest["gaida"] = {name:"Gaida", lang:"lv"};
-guest["alberts"] = {name:"Albert", lang:"lv"};
+guest["alise-roberts"] = {name:"Alise un Robert", lang:"lv"};
+guest["ramona-janis"] = {name:"Ramona un Jāni", lang:"lv"};
+guest["mikus"] = {name:"Mikus", lang:"lv"};
+guest["gaida-alberts"] = {name:"Gaida un Albert", lang:"lv"};
 guest["andrey"] = {name:"Андрей", lang:"ru"};
 guest["krisjanis"] = {name:"Krišjāni", lang:"lv"};
 guest["vladimir"] = {name:"Вова", lang:"ru"};
 guest["normunds"] = {name:"Normund", lang:"lv"};
-guest["jelena"] = {name:"Лена", lang:"ru"};
-guest["sergey"] = {name:"Сергей", lang:"ru"};
+guest["jelena-sergey"] = {name:"Лена и Сергей", lang:"ru"};
 guest["guna"] = {name:"Guna", lang:"lv"};
 guest["zelma"] = {name:"Zelma", lang:"lv"};
 guest["mareta"] = {name:"Māreta", lang:"lv"};
@@ -69,13 +65,12 @@ guest["monta"] = {name:"Monta", lang:"lv"};
 guest["beate"] = {name:"Beāte", lang:"lv"};
 guest["niklavs"] = {name:"Niklāv", lang:"lv"};
 guest["ieva"] = {name:"Ieva", lang:"lv"};
-guest["darta"] = {name:"Dārta", lang:"lv"};
-guest["alexey"] = {name:"Лёша", lang:"ru"};
-guest["matiss"] = {name:"Matīs", lang:"lv"};
+guest["darta-alexey"] = {name:"Dārta un Aleksej", lang:"lv"};
+guest["matiss"] = {name:"Matīss", lang:"lv"};
 guest["andis"] = {name:"Andi", lang:"lv"};
 guest["alexander"] = {name:"Саша", lang:"ru"};
-guest["peteris"] = {name:"Pēteri", lang:"lv"};
-guest["katrina"] = {name:"Katrīna", lang:"lv"};
+guest["katrina-peteris"] = {name:"Katrīna un Pēteri", lang:"lv"};
+guest["ansis"] = {name:"Ansi", lang:"lv"};
 
 name = guest[id].name;
 lang = guest[id].lang;
@@ -85,7 +80,7 @@ document.getElementById("center").innerHTML = "<p style=\"font-size:30px\">"+nam
 
 document.getElementById("top").innerHTML = (lang=="lv"?"Elīza un Žeņa precas!":"Женя и Элиза женятся!");
 
-document.getElementById("bottomleft").innerHTML = (lang=="lv"?"Kad: 13. jūlijā<br/>Kur: Cesvainē un Virgabaļos<br/>Vairāk info: sekos":"Когда? 13-ого июля<br/>Где: Цесвайне и Виргабали<br/>Больше инфо: следует");
+document.getElementById("bottomleft").innerHTML = (lang=="lv"?"Kad: 13. jūlijā<br/>Kur: Cesvainē un Virgabaļos<br/>Vairāk info: sekos":"Когда: 13-ого июля<br/>Где: Цесвайне и Виргабали<br/>Больше инфо: следует");
 </script>
 
 <canvas id="canvas" width="500" height="500"></canvas>
@@ -148,7 +143,7 @@ document.getElementById("bottomleft").innerHTML = (lang=="lv"?"Kad: 13. jūlijā
 		beop(-l);
 		
 		context.translate(cx,cy);
-		context.rotate(0.02);
+		context.rotate(mobile() ? 0.04 : 0.02);
 		context.translate(-cx,-cy);
 
 		requestAnimationFrame(draw);
